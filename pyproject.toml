@@ -1,59 +1,27 @@
 [build-system]
-requires = ["setuptools>=68.0", "wheel"]
+requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "hello_calc"
+name = "hello-calc"
 version = "0.1.0"
 description = "A tiny Python arithmetic library used to test the agentic build platform end-to-end."
-requires-python = ">=3.10"
-dependencies = []
-
-[project.optional-dependencies]
-dev = ["mypy", "ruff"]
-
-[tool.setuptools.packages.find]
-where = ["src"]
+authors = [
+    { name="Your Name", email="your.email@example.com" }
+]
+dependencies = ["python >= 3.9"]
 
 [tool.ruff]
 line-length = 88
-target-version = "py310"
-
-[tool.ruff.lint]
-select = ["ALL"]
-ignore = [
-    "A003",  # Class attribute name shadowing a Python standard library module
-    "ANN101",  # Missing type annotation for self in method
-    "ANN102",  # Missing type annotation for cls in classmethod
-    "ARG001",  # Unused function argument
-    "D100",  # Missing docstring in public module
-    "D104",  # Missing docstring in public package
-    "E501",  # Line too long (enforced by formatter)
-    "ERA001",  # Found commented-out code
-    "FA100",  # Missing from __future__ import annotations
-    "PD",  # pandas-related rules not applicable
-    "PLR0913",  # Too many arguments in function definition
-    "PT",  # pytest-related rules (tests are separate)
-    "RUF012",  # Mutable class default values (acceptable for simplicity)
-]
-
-[tool.ruff.lint.pydocstyle]
-convention = "google"
+target-version = "py39"
 
 [tool.mypy]
-python_version = "3.10"
 strict = true
-warn_return_any = true
-warn_unused_configs = true
-disallow_untyped_defs = true
-disallow_incomplete_defs = true
-check_untyped_defs = true
-disallow_untyped_decorators = true
-no_implicit_optional = true
-strict_optional = true
-show_error_codes = true
-pretty = true
 
-[[tool.mypy.overrides]]
-module = ["tests.*"]
-ignore_errors = true
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+    "mypy"
+]
+
