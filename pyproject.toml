@@ -1,28 +1,70 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
-build-backend = "setuptools.backends.legacy:build"
+requires = ["hatchling>=1.20"]
+build-backend = "hatchling.build"
 
 [project]
-name = "hello-calc"
+name = "hello_calc"
 version = "0.1.0"
-description = "Simple arithmetic library — build platform test project"
-requires-python = ">=3.12"
-dependencies = []
+description = "A tiny Python arithmetic library used to test the agentic build platform end-to-end."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = []
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hello_calc"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "pytest-cov", "ruff", "mypy"]
-
-[tool.setuptools.packages.find]
-where = ["src"]
+dev = [
+    "ruff>=0.4.0",
+    "mypy>=1.8.0",
+    "pytest>=8.0.0",
+]
 
 [tool.ruff]
-line-length = 88
-target-version = "py312"
+target-version = "py310"
+line-length = 100
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "UP", "ANN"]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # pyflakes
+    "UP",     # pyupgrade
+    "B",      # flake8-bugbear
+    "SIM",    # flake8-simplify
+    "I",      # isort
+    "N",      # pep8-naming
+    "RUF",    # ruff-specific rules
+]
 ignore = []
 
+[tool.ruff.lint.isort]
+known-first-party = ["hello_calc"]
+
 [tool.mypy]
-python_version = "3.12"
 strict = true
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+strict_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+ignore_errors = true
