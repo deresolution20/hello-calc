@@ -1,0 +1,5 @@
+type: library
+privacy_sensitive: false
+protected_test_path: "tests/acceptance"
+python_version: "3.12"
+library_name: "hello-calc"
