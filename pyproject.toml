@@ -1,58 +1,44 @@
 [build-system]
-requires = ["hatchling>=1.20"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "hello_calc"
 version = "0.1.0"
 description = "A tiny Python arithmetic library used to test the agentic build platform end-to-end."
-readme = "README.md"
-license = "MIT"
-requires-python = ">=3.10"
-authors = []
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Developers",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-]
-
-[tool.hatch.build.targets.wheel]
-packages = ["src/hello_calc"]
+requires-python = ">=3.9"
+dependencies = []
 
 [project.optional-dependencies]
-dev = [
-    "ruff>=0.4.0",
-    "mypy>=1.8.0",
-    "pytest>=8.0.0",
-]
+dev = ["mypy", "ruff"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.ruff]
-target-version = "py310"
-line-length = 100
+target-version = "py39"
+line-length = 88
 
 [tool.ruff.lint]
 select = [
     "E",      # pycodestyle errors
     "W",      # pycodestyle warnings
     "F",      # pyflakes
-    "UP",     # pyupgrade
-    "B",      # flake8-bugbear
-    "SIM",    # flake8-simplify
     "I",      # isort
     "N",      # pep8-naming
+    "UP",     # pyupgrade
+    "B",      # flake8-bugbear
+    "C4",     # flake8-comprehensions
+    "SIM",    # flake8-simplify
     "RUF",    # ruff-specific rules
 ]
-ignore = []
 
-[tool.ruff.lint.isort]
-known-first-party = ["hello_calc"]
+[tool.ruff.lint.pydocstyle]
+convention = "google"
 
 [tool.mypy]
 strict = true
-python_version = "3.10"
+python_version = "3.9"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = true
@@ -63,8 +49,5 @@ no_implicit_optional = true
 strict_optional = true
 warn_redundant_casts = true
 warn_unused_ignores = true
+warn_no_return = true
 show_error_codes = true
-
-[[tool.mypy.overrides]]
-module = "tests.*"
-ignore_errors = true
