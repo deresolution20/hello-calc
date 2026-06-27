@@ -1,4 +1,4 @@
-"""Core arithmetic module with type annotations."""
+"""Core arithmetic functions for hello-calc."""
 
 
 def add(a: float, b: float) -> float:
@@ -7,7 +7,7 @@ def add(a: float, b: float) -> float:
 
 
 def subtract(a: float, b: float) -> float:
-    """Return the difference of a and b."""
+    """Return the difference of a minus b."""
     return float(a - b)
 
 
@@ -25,4 +25,3 @@ def divide(a: float, b: float) -> float:
     if b == 0:
         raise ValueError("division by zero")
     return float(a / b)
-
