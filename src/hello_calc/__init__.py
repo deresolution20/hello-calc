@@ -1,13 +1,5 @@
-"""hello_calc - A tiny Python arithmetic library."""
+# src/hello_calc/__init__.py
 
-from hello_calc.calc import add
-from hello_calc.calc import divide
-from hello_calc.calc import multiply
-from hello_calc.calc import subtract
+from .calc import add, subtract, multiply, divide
 
-__all__ = [
-    "add",
-    "subtract",
-    "multiply",
-    "divide",
-]
+__all__ = ['add', 'subtract', 'multiply', 'divide']
