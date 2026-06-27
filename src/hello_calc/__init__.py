@@ -1,1 +1,3 @@
-# This is the package initialization file for hello-calc.
+from .calc import add, subtract, multiply, divide
+
+__all__ = ["add", "subtract", "multiply", "divide"]
