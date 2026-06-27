@@ -14,7 +14,17 @@ dependencies = []
 dev = [
     "mypy",
     "ruff",
+    "pytest",
 ]
 
-[tool.setuptools]
-packages = ["hello_calc"]
+[tool.mypy]
+strict = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/acceptance/*" = ["ALL"]
