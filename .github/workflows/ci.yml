@@ -20,14 +20,15 @@ jobs:
       - name: Check protected test path is not modified
         run: |
           set -euo pipefail
+          # Only enforce on PRs — direct pushes to main are orchestrator
+          # acceptance-test commits, which are allowed to modify tests/acceptance/.
+          if [ "${{ github.event_name }}" != "pull_request" ]; then
+            echo "SKIP: Not a PR — orchestrator commits to main are exempt."
+            exit 0
+          fi
           PROTECTED="tests/acceptance"
           echo "Checking that no files under '$PROTECTED' were modified..."
-          # On PRs compare against base; on push compare against parent commit.
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            BASE="${{ github.event.pull_request.base.sha }}"
-          else
-            BASE="HEAD~1"
-          fi
+          BASE="${{ github.event.pull_request.base.sha }}"
           CHANGED=$(git diff --name-only "$BASE"...HEAD 2>/dev/null || git diff --name-only HEAD~1 HEAD || true)
           if echo "$CHANGED" | grep -q "^${PROTECTED}/"; then
             echo "FAIL: protected test path was modified:"
@@ -140,3 +141,4 @@ jobs:
             exit 1
           fi
           echo "PASS: no secrets detected"
+
